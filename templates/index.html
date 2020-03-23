@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">URL Shortener</h1>
+    <p class="lead">Enter a URL below to shorten it</p>
+</div>
+
+<form action="{{ url_for('shorten') }}" method="POST">
+    <div class="form-group">
+        <input type="url" name="url" placeholder="URL" class="form-control">
+    </div>
+    <input type="submit" class="btn btn-primary">
+</form>
+{% endblock %}

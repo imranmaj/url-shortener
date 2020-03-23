@@ -1,0 +1,2 @@
+class NoSuchUrlIdError(Exception):
+    pass

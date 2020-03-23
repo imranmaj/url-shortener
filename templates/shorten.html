@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .image-button {
+        display: flex;
+        align-items: center;
+    }
+</style>
+<h1 class="display-4">Your URL has been shortened</h1>
+<div class="form-group">
+    <label for="url">Original URL</label>
+    <div class="input-group">
+        <input id="url" type="text" value="{{ url }}" class="form-control" readonly>
+        <div class="input-group-append">
+            <button class="btn btn-primary image-button">
+                <img src="{{ url_for('static', filename='files.svg') }}">
+            </button>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="shortUrl">Shortened URL</label>
+    <div class="input-group">
+        <input id="shortUrl" type="text" value="{{ short_url_prefix }}{{ url_id }}" class="form-control" readonly>
+        <div class="input-group-append">
+            <button class="btn btn-primary image-button">
+                <img src="{{ url_for('static', filename='files.svg') }}">
+            </button>
+        </div>
+    </div>
+</div>
+<a href="{{ url_for('index') }}" class="btn btn-secondary">Shorten another URL</a>
+<script>
+    $(function() {
+        let readOnlyBoxes = $(":input[type=text][readonly='readonly']");
+        readOnlyBoxes.attr("onfocus", "this.select();");
+        readOnlyBoxes.attr("onmouseup", "return false;");
+
+        $(".image-button").click(function() {
+            $(this).parent().siblings()[0].select();
+            document.execCommand("copy");
+        })
+    })
+</script>
+{% endblock %}
